@@ -1,11 +1,38 @@
 
+ import { Provider } from 'react-redux';
 import './App.css';
+import Body from './Components/Body';
+import Head from './Components/Head';
+import Store from './utils/Store';
+import {createBrowserRouter,RouterProvider} from 'react-router-dom'
+import MainContainer from './Components/mainContainer';
+import Watch from './Components/Watch';
 
 function App() {
+  const appRouter=createBrowserRouter([{
+    path:"/",
+    element:<Body/>,
+    children:[
+      {
+        path:"/",
+        element:<MainContainer/>
+      },
+      {
+        path:"/watch",
+        element:<Watch/>
+      }
+    ]
+ }])
   return (
-    <div className="bg-black text-white h-full w-full flex-row justify-center">
-     <h1 className='m-auto text-gray-50'>Youtube</h1>
-     <p>add the button</p>
+    
+    
+    <div>
+      <Provider store={Store}>
+       
+      <Head/>
+      <RouterProvider router={appRouter}/>
+      </Provider> 
+     
     </div>
   );
 }
